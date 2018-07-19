@@ -41,19 +41,19 @@ client.create_event(
       entity_type="user",
       entity_id=str(count), # use the count num as user ID
       properties= {
-        "attr0" : int(attr[0]),
-        "attr1" : int(attr[1]),
-        "attr2" : int(attr[2]),
-		"attr3" : int(attr[3]),
-		"attr4" : int(attr[4]),
-		"attr5" : int(attr[5]),
-		"attr6" : int(attr[6]),
-		"attr7" : int(attr[7]),
-        "plan" : int(plan)
+        "attr0" : float(attr[0]),
+        "attr1" : float(attr[1]),
+        "attr2" : float(attr[2]),
+        "attr3" : float(attr[3]),
+        "attr4" : float(attr[4]),
+        "attr5" : float(attr[5]),
+        "attr6" : float(attr[6]),
+        "attr7" : float(attr[7]),
+        "plan" : float(plan)
       }
 ```
 ## Install and Run PredictionIO
-First you need to [install PredictionIO 0.9.1](http://docs.prediction.io/install/) (if you haven't done it).
+First you need to [install PredictionIO 0.12.1](https://predictionio.apache.org/install/) (if you haven't done it).
 Let's say you have installed PredictionIO at /home/yourname/PredictionIO/. For convenience, add PredictionIO's binary command path to your PATH, i.e. /home/yourname/PredictionIO/bin
 ```
 $ PATH=$PATH:/home/yourname/PredictionIO/bin; export PATH
@@ -216,6 +216,12 @@ import predictionio
 engine_client = predictionio.EngineClient(url="http://localhost:8000")
 print engine_client.send_query({"features" :[-1, -2, -1, -3, 0, 0, -1, 0]})
 
+```
+
+Sample Curl Request
+```
+curl -H "Content-Type: application/json" \
+-d '{ "features": [-1, -2, -1, -3, 0, 0, -1, 0] }' http://localhost:8000/queries.json
 ```
 The following is sample JSON response:
 
